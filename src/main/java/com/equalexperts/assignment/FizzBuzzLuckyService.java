@@ -3,8 +3,8 @@ package com.equalexperts.assignment;
 
 import com.equalexperts.assignment.validators.RangeValidation;
 
-import java.util.StringJoiner;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import static java.lang.String.valueOf;
 import static java.util.stream.IntStream.rangeClosed;
@@ -26,11 +26,9 @@ public class FizzBuzzLuckyService implements IFizzBuzzLuckyService {
     }
 
     private String reduce(int startRange, int endRange) {
-        StringJoiner joiner = new StringJoiner(" ");
-        rangeClosed(startRange, endRange)
+        return rangeClosed(startRange, endRange)
                 .mapToObj(this::transform)
-                .forEach(joiner::add);
-        return joiner.toString();
+                .collect(Collectors.joining(" "));
     }
 
     private String transform(int number) {
